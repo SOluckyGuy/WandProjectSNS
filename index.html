@@ -22,7 +22,6 @@
         .discord-btn, .action-btn{background:#5865f2;color:#fff;border:none;padding:12px 20px;border-radius:8px;font-weight:700;cursor:pointer;width:100%;transition:.3s;display:flex;justify-content:center;align-items:center;gap:10px;text-transform:uppercase;font-size:14px}
         .action-btn{background:#0072ff; margin-top: 10px;}
         .special-btn{background:#fc0 !important; color:#000 !important; margin-top: 20px;}
-        .discord-btn:hover, .action-btn:hover{transform:translateY(-2px);box-shadow:0 5px 15px rgba(0,114,255,.4)}
         .desc-text{color:#ccc;font-size:14px;line-height:1.6;margin-bottom:20px}
         input{width:100%;box-sizing:border-box;padding:12px;margin-bottom:12px;background:#0c0c0c;border:1px solid #333;border-radius:8px;color:#fff;outline:none}
         input:focus{border-color:#0072ff}
@@ -36,6 +35,7 @@
         <button class="tab-btn" id="b-info">INFO</button>
         <div style="height:1px; width:30px; background:#222; margin: 5px 0;"></div>
         <button class="tab-btn" id="b-auth">AUTH</button>
+        <button class="tab-btn" id="b-lic" style="display:none; border-color:#00ff96; color:#00ff96">LIC</button>
         <button class="tab-btn" id="b-special" style="display:none; border-color:#fc0; color:#fc0">SPECIAL</button>
         <button class="tab-btn" id="b-user" style="display:none">USER</button>
     </div>
@@ -51,6 +51,18 @@
             <h1>Information</h1>
             <p class="desc-text">WandProjectSN — authentic software solution. Stay updated.</p>
             <button class="discord-btn" id="b-dsc">JOIN DISCORD</button>
+        </div>
+
+        <div id="t-lic" class="container">
+            <h1>License Management</h1>
+            <div style="margin-bottom: 20px; text-align: left;">
+                <label class="label" style="font-size: 10px;">OLD HWID (TARGET)</label>
+                <input type="text" id="search-hwid" placeholder="Enter Your Old HWID">
+                <label class="label" style="font-size: 10px;">NEW HWID (TARGET)</label>
+                <input type="text" id="new-hwid" placeholder="Enter Your New HWID">
+                <button class="action-btn" style="background:#00ff96; color:#000" onclick="searchAndRequestHWID()">Update HWID</button>
+            </div>
+            <p id="lic-msg" class="msg" style="color:#00ff96; display: block;"></p>
         </div>
 
         <div id="t-special" class="container">
@@ -92,6 +104,7 @@
             <button class="action-btn" style="background:#333; margin-top: 20px;" onclick="logout()">Logout</button>
         </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script src="https://raw.githack.com/ILikeSaturday/Helpers/main/Wander.js"></script>
 </body>

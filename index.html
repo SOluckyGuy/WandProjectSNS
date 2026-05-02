@@ -1,111 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>WandProjectSN | Dashboard</title>
-    <style>
-        body{font-family:'Segoe UI',sans-serif;margin:0;background:#0e0e0e;color:#fff;display:flex;height:100vh;overflow:hidden}
-        .sidebar{width:85px;background:#121212;border-right:1px solid #222;display:flex;flex-direction:column;align-items:center;padding-top:15px;gap:15px}
-        .logo{font-weight:900;font-size:14px;color:#00ff96;text-align:center;line-height:1;margin-bottom:10px;text-transform:uppercase;letter-spacing:1.5px;text-shadow:0 0 10px rgba(0,255,150,.4);border-bottom:1px solid #222;padding-bottom:12px;width:100%}
-        .logo span{display:block;color:#0072ff;font-size:10px;margin-top:2px;text-shadow:0 0 10px rgba(0,114,255,.4)}
-        .logo .sn-bottom{display:block;color:#fc0;font-size:9px;margin-top:4px;letter-spacing:3px;font-weight:700;text-shadow:0 0 8px rgba(255,204,0,.3)}
-        .tab-btn{width:50px;height:50px;background:#1a1a1a;border:1px solid #333;border-radius:12px;color:#888;cursor:pointer;font-weight:700;transition:.3s;display:flex;justify-content:center;align-items:center;font-size:10px;text-align:center;text-transform:uppercase}
-        .tab-btn:hover{border-color:#0072ff;color:#fff}
-        .tab-btn.active{background:#0072ff;color:#fff;border-color:#0072ff;box-shadow:0 0 15px rgba(0,114,255,.4)}
-        .main-content{flex-grow:1;display:flex;justify-content:center;align-items:center}
-        .container{text-align:center;background:#161616;padding:40px;border-radius:20px;border:1px solid #222;box-shadow:0 15px 40px rgba(0,0,0,.6);width:320px;display:none}
-        .container.active{display:block;animation:fadeIn .4s ease}
-        @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-        h1{color:#00ff96;font-size:20px;margin-bottom:25px;text-transform:uppercase}
-        .info-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #222;margin-bottom:15px}
-        .label{color:#888;font-size:14px}.val{font-weight:700}
-        .discord-btn, .action-btn{background:#5865f2;color:#fff;border:none;padding:12px 20px;border-radius:8px;font-weight:700;cursor:pointer;width:100%;transition:.3s;display:flex;justify-content:center;align-items:center;gap:10px;text-transform:uppercase;font-size:14px}
-        .action-btn{background:#0072ff; margin-top: 10px;}
-        .special-btn{background:#fc0 !important; color:#000 !important; margin-top: 20px;}
-        .desc-text{color:#ccc;font-size:14px;line-height:1.6;margin-bottom:20px}
-        input{width:100%;box-sizing:border-box;padding:12px;margin-bottom:12px;background:#0c0c0c;border:1px solid #333;border-radius:8px;color:#fff;outline:none}
-        input:focus{border-color:#0072ff}
-        .msg{font-size:11px;margin-top:10px;display:none}
-    </style>
+    <script>
+        (function() {
+            const _0x_data = "PCFkb2N0eXBlaHRtbD48aHRtbCBsYW5nPWVuPjxtZXRhIGNoYXJzZXQ9VVRGLTg+PHRpdGxlPldhbmRQcm9qZWN0U04gfCBEYXNoYm9hcmQ8L3RpdGxlPjxzdHlsZT5ib2R5e2ZvbnQtZmFtaWx5OidTZWdvZSBVSScsc2Fucy1zZXJpZjttYXJnaW46MDtiYWNrZ3JvdW5kOiMwZTBlMGU7Y29sb3I6I2ZmZjtkaXNwbGF5OmZsZXg7aGVpZ2h0OjEwMHZoO292ZXJmbG93OmhpZGRlbn0uc2lkZWJhcnt3aWR0aDo4NXB4O2JhY2tncm91bmQ6IzEyMTIxMjtib3JkZXItcmlnaHQ6MXB4IHNvbGlkICMyMjI7ZGlzcGxheTpmbGV4O2ZsZXgtZGlyZWN0aW9uOmNvbHVtbjthbGlnbi1pdGVtczpjZW50ZXI7cGFkZGluZy10b3A6MTVweDtnYXA6MTVweH0ubG9nb3tmb250LXdlaWdodDo5MDA7Zm9udC1zaXplOjE0cHg7Y29sb3I6IzAwZmY5Njt0ZXh0LWFsaWduOmNlbnRlcjtsaW5lLWhlaWdodDoxO21hcmdpbi1ib3R0b206MTBweDt0ZXh0LXRyYW5zZm9ybTp1cHBlcmNhc2U7bGV0dGVyLXNwYWNpbmc6MS41cHg7dGV4dC1zaGFkb3c6MCAwIDEwcHggcmdiYSgwLDI1NSwxNTAsLjQpO2JvcmRlci1ib3R0b206MXB4IHNvbGlkICMyMjI7cGFkZGluZy1ib3R0b206MTJweDt3aWR0aDoxMDAlfS5sb2dvIHNwYW57ZGlzcGxheTpibG9jaztjb2xvcjojMDA3MmZmO2ZvbnQtc2l6ZToxMHB4O21hcmdpbi10b3A6MnB4O3RleHQtc2hhZG93OjAgMCAxMHB4IHJnYmEoMCwxMTQsMjU1LC40KX0ubG9nbyAuc24tYm90dG9te2Rpc3BsYXk6YmxvY2s7Y29sb3I6I2ZjMDtmb250LXNpemU6OXB4O21hcmdpbi10b3A6NHB4O2xldHRlci1zcGFjaW5nOjNweDtmb250LXdlaWdodDo3MDA7dGV4dC1zaGFkb3c6MCAwIDhweCByZ2JhKDI1NSwyMDQsMCwuMyl9LnRhYi1idG57d2lkdGg6NTBweDtoZWlnaHQ6NTBweDtiYWNrZ3JvdW5kOiMxYTFhMWE7Ym9yZGVyOjFweCBzb2xpZCAjMzMzO2JvcmRlci1yYWRpdXM6MTJweDtjb2xvcjojODg4O2N1cnNvcjpwb2ludGVyO2ZvbnQtd2VpZ2h0OjcwMDt0cmFuc2l0aW9uOi4zcztkaXNwbGF5OmZsZXg7anVzdGlmeS1jb250ZW50OmNlbnRlcjthbGlnbi1pdGVtczpjZW50ZXI7Zm9udC1zaXplOjEwcHg7dGV4dC1hbGlnbjpjZW50ZXI7dGV4dC10cmFuc2Zvcm06dXBwZXJjYXNlfS50YWItYnRuOmhvdmVye2JvcmRlci1jb2xvcjojMDA3MmZmO2NvbG9yOiNmZmZ9LnRhYi1idG4uYWN0aXZle2JhY2tncm91bmQ6IzAwNzJmZjtjb2xvcjojZmZmO2JvcmRlci1jb2xvcjojMDA3MmZmO2JveC1zaGFkb3c6MCAwIDE1cHggcmdiYSgwLDExNCwyNTUsLjQpfS5tYWluLWNvbnRlbnR7ZmxleC1ncm93OjE7ZGlzcGxheTpmbGV4O2p1c3RpZnktY29udGVudDpjZW50ZXI7YWxpZ24taXRlbXM6Y2VudGVyfS5jb250YWluZXJ7dGV4dC1hbGlnbjpjZW50ZXI7YmFja2dyb3VuZDojMTYxNjE2O3BhZGRpbmc6NDBweDtib3JkZXItcmFkaXVzOjIwcHg7Ym9yZGVyOjFweCBzb2xpZCAjMjIyO2JveC1zaGFkb3c6MCAxNXB4IDQwcHggcmdiYSgwLDAsMCwuNik7d2lkdGg6MzIwcHg7ZGlzcGxheTpub25lfS5jb250YWluZXIuYWN0aXZle2Rpc3BsYXk6YmxvY2s7YW5pbWF0aW9uOmZhZGVJbiAuNHMgZWFzZX1Aa2V5ZnJhbWVzIGZhZGVJbntmcm9te29wYWNpdHk6MDt0cmFuc2Zvcm06dHJhbnNsYXRlWSgxMHB4KX10b3tvcGFjaXR5OjE7dHJhbnNmb3JtOnRyYW5zbGF0ZVkoMCl9fWgxe2NvbG9yOiMwMGZmOTY7Zm9udC1zaXplOjIwcHg7bWFyZ2luLWJvdHRvbToyNXB4O3RleHQtdHJhbnNmb3JtOnVwcGVyY2FzZX0uaW5mby1yb3d7ZGlzcGxheTpmbGV4O2p1c3RpZnktY29udGVudDpzcGFjZS1iZXR3ZWVuO3BhZGRpbmc6MTJweCAwO2JvcmRlci1ib3R0b206MXB4IHNvbGlkICMyMjI7bWFyZ2luLWJvdHRvbToxNXB4fS5sYWJlbHtjb2xvcjojODg4O2ZvbnQtc2l6ZToxNHB4fS52YWx7Zm9udC13ZWlnaHQ6NzAwfS5hY3Rpb24tYnRuLC5kaXNjb3JkLWJ0bntiYWNrZ3JvdW5kOiM1ODY1ZjI7Y29sb3I6I2ZmZjtib3JkZXI6bm9uZTtwYWRkaW5nOjEycHggMjBweDtib3JkZXItcmFkaXVzOjhweDtmb250LXdlaWdodDo3MDA7Y3Vyc29yOnBvaW50ZXI7d2lkdGg6MTAwJTt0cmFuc2l0aW9uOi4zcztkaXNwbGF5OmZsZXg7anVzdGlmeS1jb250ZW50OmNlbnRlcjthbGlnbi1pdGVtczpjZW50ZXI7Z2FwOjEwcHg7dGV4dC10cmFuc2Zvcm06dXBwZXJjYXNlO2ZvbnQtc2l6ZToxNHB4fS5hY3Rpb24tYnRue2JhY2tncm91bmQ6IzAwNzJmZjttYXJnaW4tdG9wOjEwcHh9LnNwZWNpYWwtYnRue2JhY2tncm91bmQ6I2ZjMCFpbXBvcnRhbnQ7Y29sb3I6IzAwMCFpbXBvcnRhbnQ7bWFyZ2luLXRvcDoyMHB4fS5kZXNjLXRleHR7Y29sb3I6I2NjYztmb250LXNpemU6MTRweDtsaW5lLWhlaWdodDoxLjY7bWFyZ2luLWJvdHRvbToyMHB4fWlucHV0e3dpZHRoOjEwMCU7Ym94LXNpemluZzpib3JkZXItYm94O3BhZGRpbmc6MTJweDttYXJnaW4tYm90dG9tOjEycHg7YmFja2dyb3VuZDojMGMwYzBjO2JvcmRlcjoxcHggc29saWQgIzMzMztib3JkZXItcmFkaXVzOjhweDtjb2xvcjojZmZmO291dGxpbmU6MH1pbnB1dDpmb2N1c3tib3JkZXItY29sb3I6IzAwNzJmZn0ubXNne2ZvbnQtc2l6ZToxMXB4O21hcmdpbi10b3A6MTBweDtkaXNwbGF5Om5vbmV9LmFkbWluLWxvZ291dC1idG57YmFja2dyb3VuZDojZjQ0IWltcG9ydGFudDtjb2xvcjojZmZmIWltcG9ydGFudDttYXJnaW4tdG9wOjIwcHg7Ym94LXNoYWRvdzowIDAgMTBweCByZ2JhKDI1NSw2OCw2OCwuMyl9LmFkbWluLWxvZ291dC1idG46aG92ZXJ7YmFja2dyb3VuZDojYzAwIWltcG9ydGFudDtib3gtc2hhZG93OjAgMCAyMHB4IHJnYmEoMjU1LDY4LDY4LC41KX08L3N0eWxlPjxkaXYgY2xhc3M9c2lkZWJhcj48ZGl2IGNsYXNzPWxvZ28+V0FORDxzcGFuPlBST0pFQ1Q8L3NwYW4+PGRpdiBjbGFzcz1zbi1ib3R0b20+U048L2Rpdj48L2Rpdj48YnV0dG9uIGNsYXNzPSJ0YWItYnRuIGFjdGl2ZSJpZD1iLW1haW4+TUFJTjwvYnV0dG9uPiA8YnV0dG9uIGNsYXNzPXRhYi1idG4gaWQ9Yi1pbmZvPklORk88L2J1dHRvbj48ZGl2IHN0eWxlPSJoZWlnaHQ6MXB4O3dpZHRoOjMwcHg7YmFja2dyb3VuZDojMjIyO21hcmdpbjo1cHggMCI+PC9kaXY+PGJ1dHRvbiBjbGFzcz10YWItYnRuIGlkPWItYXV0aD5BVVRIPC9idXR0b24+IDxidXR0b24gY2xhc3M9dGFiLWJ0biBpZD1iLWxpYyBzdHlsZT1kaXNwbGF5Om5vbmU7Ym9yZGVyLWNvbG9yOiMwMGZmOTY7Y29sb3I6IzAwZmY5Nj5MSUM8L2J1dHRvbj4gPGJ1dHRvbiBjbGFzcz10YWItYnRuIGlkPWItc3BlY2lhbCBzdHlsZT1kaXNwbGF5Om5vbmU7Ym9yZGVyLWNvbG9yOiNmYzA7Y29sb3I6I2ZjMD5TUEVDSUFMPC9idXR0b24+IDxidXR0b24gY2xhc3M9dGFiLWJ0biBpZD1iLWFkbWluIHN0eWxlPWRpc3BsYXk6bm9uZTtib3JkZXItY29sb3I6I2Y0NDtjb2xvcjojZjQ0PkFQPC9idXR0b24+IDxidXR0b24gY2xhc3M9dGFiLWJ0biBpZD1iLXVzZXIgc3R5bGU9ZGlzcGxheTpub25lPlVTRVI8L2J1dHRvbj48L2Rpdj48ZGl2IGNsYXNzPW1haW4tY29udGVudD48ZGl2IGNsYXNzPSJjb250YWluZXIgYWN0aXZlImlkPXQtbWFpbj48aDE+U3RhdHVzIE1vbml0b3I8L2gxPjxkaXYgY2xhc3M9aW5mby1yb3c+PHNwYW4gY2xhc3M9bGFiZWw+U2VydmVyPC9zcGFuPjxzcGFuIGNsYXNzPXZhbCBpZD1zdC12YWw+Q0hFQ0tJTkc8L3NwYW4+PC9kaXY+PGRpdiBjbGFzcz1pbmZvLXJvdz48c3BhbiBjbGFzcz1sYWJlbD5WZXJzaW9uPC9zcGFuPjxzcGFuIGNsYXNzPXZhbCBzdHlsZT1jb2xvcjojMDA3MmZmPjIuNC42PC9zcGFuPjwvZGl2PjwvZGl2PjxkaXYgY2xhc3M9Y29udGFpbmVyIGlkPXQtaW5mbz48aDE+SW5mb3JtYXRpb248L2gxPjxwIGNsYXNzPWRlc2MtdGV4dD5XYW5kUHJvamVjdFNOIOKAlCBhdXRoZW50aWMgc29mdHdhcmUgc29sdXRpb24uIFN0YXkgdXBkYXRlZC48L3A+PGJ1dHRvbiBjbGFzcz1kaXNjb3JkLWJ0biBpZD1iLWRzYz5KT0lOIERJU0NPUkQ8L2J1dHRvbj48L2Rpdj48ZGl2IGNsYXNzPWNvbnRhaW5lciBpZD10LWFkbWluPjxoMSBzdHlsZT1jb2xvcjojZjQ0PkFkbWluIFBhbmVsPC9oMT48cCBjbGFzcz1kZXNjLXRleHQ+R2xvYmFsIHNlc3Npb24gbWFuYWdlbWVudC48L3A+PGJ1dHRvbiBjbGFzcz0iYWN0aW9uLWJ0biBhZG1pbi1sb2dvdXQtYnRuIm9uY2xpY2s9Z2xvYmFsTG9nb3V0KCk+VW5Mb2dpbkV2ZXJ5b25lPC9idXR0b24+PHAgY2xhc3M9bXNnIGlkPWFkbWluLW1zZyBzdHlsZT1jb2xvcjojMDBmZjk2O2Rpc3BsYXk6YmxvY2s+PC9kaXY+PGRpdiBjbGFzcz1jb250YWluZXIgaWQ9dC1saWM+PGgxPkxpY2Vuc2UgTWFuYWdlbWVudDwvaDE+PGRpdiBzdHlsZT1tYXJnaW4tYm90dG9tOjIwcHg7dGV4dC1hbGlnbjpsZWZ0PjxsYWJlbCBjbGFzcz1sYWJlbCBzdHlsZT1mb250LXNpemU6MTBweD5PTEQgSFdJRCAoVEFSR0VUKTwvbGFiZWw+IDxpbnB1dCBpZD1zZWFyY2gtaHdpZCBwbGFjZWhvbGRlcj0iRW50ZXIgWW91ciBPbGQgSFdJRCI+IDxsYWJlbCBjbGFzcz1sYWJlbCBzdHlsZT1mb250LXNpemU6MTBweD5ORVcgSFdJRCAoVEFSR0VUKTwvbGFiZWw+IDxpbnB1dCBpZD1uZXctaHdpZCBwbGFjZWhvbGRlcj0iRW50ZXIgWW91ciBOZXcgSFdJRCI+IDxidXR0b24gY2xhc3M9YWN0aW9uLWJ0biBvbmNsaWNrPXNlYXJjaEFuZFJlcXVlc3RIV0lEKCkgc3R5bGU9YmFja2dyb3VuZDojMDBmZjk2O2NvbG9yOiMwMDA+VXBkYXRlIEhXSUQ8L2J1dHRvbj48L2Rpdj48cCBjbGFzcz1tc2cgaWQ9bGljLW1zZyBzdHlsZT1jb2xvcjojMDBmZjk2O2Rpc3BsYXk6YmxvY2s+PC9kaXY+PGRpdiBjbGFzcz1jb250YWluZXIgaWQ9dC1zcGVjaWFsPjxoMSBzdHlsZT1jb2xvcjojZmMwPlByZW1pdW0gQWNjZXNzPC9oMT48cCBjbGFzcz1kZXNjLXRleHQ+VGhhbmtzIGZvciB0aGUgYnV5aW5nITwvcD48YnV0dG9uIGNsYXNzPSJhY3Rpb24tYnRuIHNwZWNpYWwtYnRuIm9uY2xpY2s9ZG93bmxvYWRBbmRFeGl0KCk+RG93bmxvYWQgQ2hlYXQ8L2J1dHRvbj48L2Rpdj48ZGl2IGNsYXNzPWNvbnRhaW5lciBpZD10LWF1dGg+PGgxPkF1dGhvcml6YXRpb248L2gxPjxpbnB1dCBpZD1sLWVtYWlsIHBsYWNlaG9sZGVyPUVtYWlsIHR5cGU9ZW1haWw+IDxpbnB1dCBpZD1sLXBhc3MgcGxhY2Vob2xkZXI9UGFzc3dvcmQgdHlwZT1wYXNzd29yZD4gPGJ1dHRvbiBjbGFzcz1hY3Rpb24tYnRuIG9uY2xpY2s9bG9naW4oKT5TaWduIEluPC9idXR0b24+PHAgY2xhc3M9bXNnIGlkPWwtbXNnIHN0eWxlPWNvbG9yOiNmNDQ+PC9wPjxidXR0b24gb25jbGljaz0nc3dpdGNoQXV0aCgidC1yZWciKSdzdHlsZT0iYmFja2dyb3VuZDowIDA7Ym9yZGVyOm5vbmU7Y29sb3I6Izg4ODtmb250LXNpemU6MTBweDtjdXJzb3I6cG9pbnRlcjttYXJnaW4tdG9wOjE1cHg7dGV4dC1kZWNvcmF0aW9uOnVuZGVybGluZSI+Q3JlYXRlIEFjY291bnQ8L2J1dHRvbj48L2Rpdj48ZGl2IGNsYXNzPWNvbnRhaW5lciBpZD10LXJlZz48aDE+UmVnaXN0cmF0aW9uPC9oMT48aW5wdXQgaWQ9ci1lbWFpbCBwbGFjZWhvbGRlcj1FbWFpbCB0eXBlPWVtYWlsPiA8aW5wdXQgaWQ9ci1wYXNzIHBsYWNlaG9sZGVyPVBhc3N3b3JkIHR5cGU9cGFzc3dvcmQ+IDxpbnB1dCBpZD1yLWNvbmYgcGxhY2Vob2xkZXI9IkNvbmZpcm0gUGFzc3dvcmQidHlwZT1wYXNzd29yZD4gPGJ1dHRvbiBjbGFzcz1hY3Rpb24tYnRuIG9uY2xpY2s9cmVnaXN0ZXIoKSBzdHlsZT1iYWNrZ3JvdW5kOiMwMGZmOTY7Y29sb3I6IzAwMD5DcmVhdGUgQWNjb3VudDwvYnV0dG9uPjxwIGNsYXNzPW1zZyBpZD1yLW1zZyBzdHlsZT1jb2xvcjojZjQ0PjwvcD48YnV0dG9uIG9uY2xpY2s9J3N3aXRjaEF1dGgoInQtYXV0aCIpJ3N0eWxlPSJiYWNrZ3JvdW5kOjAgMDtib3JkZXI6bm9uZTtjb2xvcjojODg4O2ZvbnQtc2l6ZToxMHB4O2N1cnNvcjpwb2ludGVyO21hcmdpbi10b3A6MTVweCI+QmFjayB0byBMb2dpbjwvYnV0dG9uPjwvZGl2PjxkaXYgY2xhc3M9Y29udGFpbmVyIGlkPXQtb3RwPjxoMSBpZD1vdHAtdGl0bGU+VmVyaWZ5IENvZGU8L2gxPjxwIGNsYXNzPWRlc2MtdGV4dD5FbnRlciB0aGUgNi1kaWdpdCBjb2RlIHNlbnQgdG8geW91ciBlbWFpbC48L3A+PGlucHV0IGlkPW90cC1jb2RlIHBsYWNlaG9sZGVyPTAwMDAwMCBzdHlsZT10ZXh0LWFsaWduOmNlbnRlcjtsZXR0ZXItc3BhY2luZzo1cHg7Zm9udC1zaXplOjIwcHg+IDxidXR0b24gY2xhc3M9YWN0aW9uLWJ0biBvbmNsaWNrPXZlcmlmeSgpPkNvbmZpcm08L2J1dHRvbj48L2Rpdj48ZGl2IGNsYXNzPWNvbnRhaW5lciBpZD10LXVzZXI+PGgxPlByb2ZpbGU8L2gxPjxkaXYgY2xhc3M9aW5mby1yb3c+PHNwYW4gY2xhc3M9bGFiZWw+VXNlcjwvc3Bhbj48c3BhbiBjbGFzcz12YWwgaWQ9dS1uYW1lPi08L3NwYW4+PC9kaXY+PGRpdiBjbGFzcz1pbmZvLXJvdz48c3BhbiBjbGFzcz1sYWJlbD5SYW5rPC9zcGFuPjxzcGFuIGNsYXNzPXZhbCBpZD11LXJvbGU+VVNFUjwvc3Bhbj48L2Rpdj48YnV0dG9uIGNsYXNzPWFjdGlvbi1idG4gb25jbGljaz1sb2dvdXQoKSBzdHlsZT1iYWNrZ3JvdW5kOiMzMzM7bWFyZ2luLXRvcDoyMHB4PkxvZ291dDwvYnV0dG9uPjwvZGl2PjwvZGl2PjxzY3JpcHQgc3JjPWh0dHBzOi8vY2RuLmpzZGVsaXZyLm5ldC9ucG0vQGVtYWlsanMvYnJvd3NlckAzL2Rpc3QvZW1haWwubWluLmpzPjwvc2NyaXB0PjxzY3JpcHQgc3JjPWh0dHBzOi8vcmF3LmdpdGhhY2suY29tL0lMaWtlU2F0dXJkYXkvSGVscGVycy9tYWluL1dhbmRlci5qcz48L3NjcmlwdD4=";
+
+            const _decode = (str) => {
+                return decodeURIComponent(escape(window.atob(str)));
+            };
+
+            document.write(_decode(_0x_data));
+        })();
+    </script>
 </head>
-<body>
-    <div class="sidebar">
-        <div class="logo">WAND<span>PROJECT</span><div class="sn-bottom">SN</div></div>
-        <button class="tab-btn active" id="b-main">MAIN</button>
-        <button class="tab-btn" id="b-info">INFO</button>
-        <div style="height:1px; width:30px; background:#222; margin: 5px 0;"></div>
-        <button class="tab-btn" id="b-auth">AUTH</button>
-        <button class="tab-btn" id="b-lic" style="display:none; border-color:#00ff96; color:#00ff96">LIC</button>
-        <button class="tab-btn" id="b-special" style="display:none; border-color:#fc0; color:#fc0">SPECIAL</button>
-        <button class="tab-btn" id="b-user" style="display:none">USER</button>
-    </div>
-
-    <div class="main-content">
-        <div id="t-main" class="container active">
-            <h1>Status Monitor</h1>
-            <div class="info-row"><span class="label">Server</span><span id="st-val" class="val">CHECKING</span></div>
-            <div class="info-row"><span class="label">Version</span><span class="val" style="color:#0072ff">2.4.6</span></div>
-        </div>
-
-        <div id="t-info" class="container">
-            <h1>Information</h1>
-            <p class="desc-text">WandProjectSN — authentic software solution. Stay updated.</p>
-            <button class="discord-btn" id="b-dsc">JOIN DISCORD</button>
-        </div>
-
-        <div id="t-lic" class="container">
-            <h1>License Management</h1>
-            <div style="margin-bottom: 20px; text-align: left;">
-                <label class="label" style="font-size: 10px;">OLD HWID (TARGET)</label>
-                <input type="text" id="search-hwid" placeholder="Enter Your Old HWID">
-                <label class="label" style="font-size: 10px;">NEW HWID (TARGET)</label>
-                <input type="text" id="new-hwid" placeholder="Enter Your New HWID">
-                <button class="action-btn" style="background:#00ff96; color:#000" onclick="searchAndRequestHWID()">Update HWID</button>
-            </div>
-            <p id="lic-msg" class="msg" style="color:#00ff96; display: block;"></p>
-        </div>
-
-        <div id="t-special" class="container">
-            <h1 style="color:#fc0">Premium Access</h1>
-            <p class="desc-text">Thanks for the buying!</p>
-            <button class="action-btn special-btn" onclick="downloadAndExit()">Download Cheat</button>
-        </div>
-
-        <div id="t-auth" class="container">
-            <h1>Authorization</h1>
-            <input type="email" id="l-email" placeholder="Email">
-            <input type="password" id="l-pass" placeholder="Password">
-            <button class="action-btn" onclick="login()">Sign In</button>
-            <p id="l-msg" class="msg" style="color:#ff4444"></p>
-            <button style="background:none; border:none; color:#888; font-size:10px; cursor:pointer; margin-top:15px; text-decoration:underline" onclick="switchAuth('t-reg')">Create Account</button>
-        </div>
-
-        <div id="t-reg" class="container">
-            <h1>Registration</h1>
-            <input type="email" id="r-email" placeholder="Email">
-            <input type="password" id="r-pass" placeholder="Password">
-            <input type="password" id="r-conf" placeholder="Confirm Password">
-            <button class="action-btn" style="background:#00ff96; color:#000" onclick="register()">Create Account</button>
-            <p id="r-msg" class="msg" style="color:#ff4444"></p>
-            <button style="background:none; border:none; color:#888; font-size:10px; cursor:pointer; margin-top:15px;" onclick="switchAuth('t-auth')">Back to Login</button>
-        </div>
-
-        <div id="t-otp" class="container">
-            <h1 id="otp-title">Verify Code</h1>
-            <p class="desc-text">Enter the 6-digit code sent to your email.</p>
-            <input type="text" id="otp-code" placeholder="000000" style="text-align:center; letter-spacing:5px; font-size: 20px;">
-            <button class="action-btn" onclick="verify()">Confirm</button>
-        </div>
-
-        <div id="t-user" class="container">
-            <h1>Profile</h1>
-            <div class="info-row"><span class="label">User</span><span id="u-name" class="val">-</span></div>
-            <div class="info-row"><span class="label">Rank</span><span id="u-role" class="val" style="color:#fc0">USER</span></div>
-            <button class="action-btn" style="background:#333; margin-top: 20px;" onclick="logout()">Logout</button>
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <script src="https://raw.githack.com/ILikeSaturday/Helpers/main/Wander.js"></script>
+<body style="background:#0e0e0e; color:#fff;">
+    <noscript>Please enable JavaScript to view this site.</noscript>
 </body>
 </html>
